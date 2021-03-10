@@ -1,9 +1,16 @@
 package br.com.diego.mvc.mudi.model;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "`order`")
 public class Order {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     private String orderName;
     private BigDecimal negotiatedValue;
@@ -11,6 +18,14 @@ public class Order {
     private String orderUrl;
     private String orderImage;
     private String description;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getOrderName() {
         return orderName;
