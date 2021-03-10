@@ -12,6 +12,29 @@
 </head>
 <body>
 <div class="container">
+
+    <div class="py-5 rounded-3" style="background-color: rgba(0, 0, 0, .06)">
+        <div class="py-5 px-4">
+            <h1 class="display-4">Meus Pedidos</h1>
+        </div>
+    </div> <!-- end py-5-->
+
+    <nav class="navbar navbar-expand navbar-light bg-light mb-3">
+        <div class="container-fluid">
+            <div class="navbar-nav">
+                <a class="nav-link active" href="">Todos</a>
+                <a class="nav-link" href="">Aguardando</a>
+                <a class="nav-link" href="">Aprovado</a>
+                <a class="nav-link" href="">Entregue</a>
+            </div> <!-- navbar-nav -->
+            <div class="d-flex">
+                <a href="/order/create">
+                    <button class="btn btn-outline-secondary">Novo</button>
+                </a>
+            </div> <!-- end d-flex -->
+        </div> <!-- end container-fluid -->
+    </nav> <!-- end navbar -->
+
     <div class="card" th:each="order : ${orders}">
         <div class="card-header" th:text="${order.orderName}">Nome do poduto</div>
         <div class="card-body">
