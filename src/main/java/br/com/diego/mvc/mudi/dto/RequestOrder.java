@@ -2,11 +2,19 @@ package br.com.diego.mvc.mudi.dto;
 
 import br.com.diego.mvc.mudi.model.Order;
 
+import javax.validation.constraints.NotBlank;
+
 public class RequestOrder {
 
+    @NotBlank
     private String orderName;
+
+    @NotBlank
     private String orderUrl;
+
+    @NotBlank
     private String orderImage;
+
     private String description;
 
     public String getOrderName() {

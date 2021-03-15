@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt=br">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,36 +18,56 @@
             <h1 class="display-4">Novo Pedido</h1>
         </div>
     </div> <!-- end py-5 -->
+    <div class="card mt-3">
+        <form th:object="${requestOrder}" class="card-body" action="/order/save" method="post">
+            <div class="mb-3">
+                <label class="form-label" for="orderName">Produto</label>
 
-    <form action="/order/save" method="post">
-        <div>
-            <label for="orderName">Produto</label>
-            <input name="orderName" placeholder="nome do produto" type="text" id="orderName">
-            <small>Informe qual é o nome do produto</small>
-        </div>
+                <input th:field="*{orderName}" th:errorclass="is-invalid" class="form-control"
+                       placeholder="nome do produto" type="text">
 
-        <div>
-            <label for="orderUrl">Url</label>
-            <input name="orderUrl" placeholder="url do produto" type="text" id="orderUrl">
-            <small>Procure em um site o produto que você deseja e cole a url da página aqui</small>
-        </div>
+                <small>Informe qual é o nome do produto</small>
 
-        <div>
-            <label for="orderImage">Produto</label>
-            <input name="orderImage" placeholder="url da imagem" type="text" id="orderImage">
-            <small>Copie a url de uma boa imagem e cole aqui para ajudar a conseguir compradores</small>
-        </div>
+                <div th:errors="*{orderName}" class="invalid-feedback">
+                    Erros do nome do produto
+                </div>
+            </div> <!-- end mb-3 -->
 
-        <div>
-            <label for="description">Descrição</label>
-            <textarea name="description" placeholder="Adicione detalhes importantes para ajudar o comprador"
-                      id="description"></textarea>
-        </div>
+            <div class="mb-3">
+                <label class="form-label" for="orderUrl">Url</label>
 
-        <button type="submit">Cadastrar</button>
+                <input th:field="*{orderUrl}" th:errorclass="is-invalid" class="form-control"
+                       placeholder="url do produto" type="text">
 
-    </form>
+                <small>Procure em um site o produto que você deseja e cole a url da página aqui</small>
 
+                <div th:errors="*{orderUrl}" class="invalid-feedback">
+                    Erros da url do produto
+                </div>
+            </div> <!-- end mb-3 -->
+
+            <div class="mb-3">
+                <label class="form-label" for="orderImage">Produto</label>
+
+                <input th:field="*{orderImage}" th:errorclass="is-invalid" class="form-control"
+                       placeholder="url da imagem" type="text">
+
+                <small>Copie a url de uma boa imagem e cole aqui para ajudar a conseguir compradores</small>
+
+                <div th:errors="*{orderImage}" class="invalid-feedback">
+                    Erros da url da imagem
+                </div>
+            </div> <!-- end mb-3 -->
+
+            <div class="mb-3">
+                <label class="form-label" for="description">Descrição</label>
+                <textarea th:field="*{description}" class="form-control"
+                          placeholder="Adicione detalhes importantes para ajudar o comprador"></textarea>
+            </div> <!-- end mb-3 -->
+
+            <button class="btn btn-primary" type="submit">Cadastrar</button>
+        </form>
+    </div> <!-- end card -->
 </div> <!-- end container -->
 
 </body>
