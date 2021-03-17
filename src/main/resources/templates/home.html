@@ -14,11 +14,21 @@
     <nav class="navbar navbar-expand navbar-light bg-light mb-3">
         <div class="container-fluid">
             <div class="navbar-nav">
-                <a class="nav-link active" href="">Todos</a>
-                <a class="nav-link" href="">Aguardando</a>
-                <a class="nav-link" href="">Aprovado</a>
-                <a class="nav-link" href="">Entregue</a>
+                <a th:classappend="${status == null ? 'active' : ''}" class="nav-link" href="/home">Todos</a>
+
+                <a th:classappend="${status == 'waiting' ? 'active' : ''}" class="nav-link" href="/home/waiting">
+                    Aguardando
+                </a>
+
+                <a th:classappend="${status == 'approved' ? 'active' : ''}" class="nav-link" href="/home/approved">
+                    Aprovado
+                </a>
+
+                <a th:classappend="${status == 'delivered' ? 'active' : ''}" class="nav-link" href="/home/delivered">
+                    Entregue
+                </a>
             </div> <!-- navbar-nav -->
+
             <div class="d-flex">
                 <a href="/order/create">
                     <button class="btn btn-outline-secondary">Novo</button>
@@ -28,32 +38,58 @@
     </nav> <!-- end navbar -->
 
     <div class="card mb-3" th:each="order : ${orders}">
-        <div class="card-header" th:text="${order.orderName}">Nome do poduto</div>
+
+        <th:block th:switch="${order.status.name()}">
+            <div th:case="'WAITING'" class="card-header alert alert-warning" th:text="${order.orderName}">
+                Nome do poduto
+            </div>
+            <div th:case="'APPROVED'" class="card-header alert alert-success" th:text="${order.orderName}">
+                Nome do poduto
+            </div>
+            <div th:case="'DELIVERED'" class="card-header alert alert-dark" th:text="${order.orderName}">
+                Nome do poduto
+            </div>
+        </th:block>
+
         <div class="card-body">
             <div class="row">
                 <div class="col-12 col-sm-8 mb-3">
+
                     <div class="row">
-                        <div class="col-md-5">Valor: <span th:text="${order.negotiatedValue}">2000,00</span></div>
+                        <div class="col-md-5">
+                            Valor:
+                            <span th:if="${order.negotiatedValue != null}"
+                                  th:text="'R$ ' + ${#numbers.formatDecimal(order.negotiatedValue, 3, 'POINT', 2, 'COMMA')}">
+                                20000000,00
+                            </span>
+                        </div>
+
                         <div class="col-md-7">
-                            Data de entrega: <span th:text="${order.deliveryDate}">07/03/2021</span>
+                            Data de entrega:
+                            <span th:text="${#temporals.format(order.deliveryDate, 'dd/MM/yyyy')}">29/11/1993</span>
                         </div>
                     </div> <!-- end row -->
+
                     <div>Produto</div>
+
                     <div>
                         <label for="orderUrl"></label>
                         <input class="form-control" th:value="${order.orderUrl}" id="orderUrl"/>
                     </div>
 
                     <div>Descrição</div>
+
                     <div>
                         <label for="description"></label>
-                        <textarea class="form-control" th:text="${order.description}" name="" id="description" cols="30"
+                        <textarea class="form-control" th:text="${order.description}" id="description" cols="30"
                                   rows="10">descriçao do pedido</textarea>
                     </div>
+
                 </div> <!-- end col-12 -->
+
                 <div class="col-12 col-sm-4">
                     <div>
-                        <img class="img-thumbnail" th:src="${order.orderImage}" src="" alt="order image">
+                        <img class="img-thumbnail" th:src="${order.orderImage}" alt="order image">
                     </div>
                 </div> <!-- end col-12 -->
             </div> <!-- end row -->

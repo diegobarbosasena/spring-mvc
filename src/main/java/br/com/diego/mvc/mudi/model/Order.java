@@ -19,6 +19,9 @@ public class Order {
     private String orderImage;
     private String description;
 
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
+
     public Integer getId() {
         return id;
     }
@@ -73,6 +76,14 @@ public class Order {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status;
     }
 }
 

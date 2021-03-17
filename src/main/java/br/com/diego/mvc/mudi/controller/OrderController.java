@@ -32,6 +32,6 @@ public class OrderController {
         Order order = request.toOrder();
         orderRepository.save(order);
 
-        return "order/create";
+        return "redirect:/home";
     }
 }

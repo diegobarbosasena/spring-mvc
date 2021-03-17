@@ -1,6 +1,7 @@
 package br.com.diego.mvc.mudi.dto;
 
 import br.com.diego.mvc.mudi.model.Order;
+import br.com.diego.mvc.mudi.model.OrderStatus;
 
 import javax.validation.constraints.NotBlank;
 
@@ -55,6 +56,7 @@ public class RequestOrder {
         order.setOrderUrl(orderUrl);
         order.setOrderImage(orderImage);
         order.setDescription(description);
+        order.setStatus(OrderStatus.WAITING);
 
         return order;
     }
