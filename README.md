@@ -5,7 +5,7 @@ da [Alura](https://www.alura.com.br).
 
 Esse curso pode não estar mais disponível na [Alura](https://www.alura.com.br), pois o mesmo pode ter sido atualizado.
 
-## Instalação
+##
 
 Para a construção desse projeto foi
 utilizado [IntelliJ IDEA](https://www.jetbrains.com/pt-br/idea/download/#section=windows).
